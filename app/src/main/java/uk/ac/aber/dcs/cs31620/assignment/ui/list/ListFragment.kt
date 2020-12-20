@@ -1,4 +1,4 @@
-package uk.ac.aber.dcs.cs31620.assignment.ui.dashboard
+package uk.ac.aber.dcs.cs31620.assignment.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import uk.ac.aber.dcs.cs31620.assignment.R
 
-class DashboardFragment : Fragment() {
+class ListFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var listViewModel: ListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        listViewModel =
+                ViewModelProvider(this).get(ListViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_list, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        listViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
