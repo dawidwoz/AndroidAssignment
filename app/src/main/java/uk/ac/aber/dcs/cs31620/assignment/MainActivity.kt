@@ -1,6 +1,7 @@
 package uk.ac.aber.dcs.cs31620.assignment
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,8 +11,25 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    companion object UiController {
+        private lateinit var binding: ActivityMainBinding
 
-    private lateinit var binding: ActivityMainBinding
+        fun hideBottomNav() {
+            binding.navView.visibility = View.GONE
+        }
+
+        fun showBottomNav() {
+            binding.navView.visibility = View.VISIBLE
+        }
+
+        fun hideToolbar() {
+            binding.toolbar.visibility = View.GONE
+        }
+
+        fun showToolbar() {
+            binding.toolbar.visibility = View.VISIBLE
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,4 +48,5 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
 }
