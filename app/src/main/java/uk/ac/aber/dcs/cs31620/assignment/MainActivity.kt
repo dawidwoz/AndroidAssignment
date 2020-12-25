@@ -2,16 +2,12 @@ package uk.ac.aber.dcs.cs31620.assignment
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ActivityMainBinding
-import uk.ac.aber.dcs.cs31620.assignment.ui.start.StartFragment
 
 class MainActivity : AppCompatActivity() {
 
