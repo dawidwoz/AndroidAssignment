@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
@@ -16,8 +14,7 @@ import androidx.navigation.fragment.findNavController
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentStartBinding
-import uk.ac.aber.dcs.cs31620.assignment.datasource.LanguageRepository
-import uk.ac.aber.dcs.cs31620.assignment.model.Language
+import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
 
 
 class StartFragment : Fragment() {
@@ -25,7 +22,7 @@ class StartFragment : Fragment() {
     private lateinit var binding: FragmentStartBinding
     private lateinit var yourLanguage: EditText
     private lateinit var desiredLanguage: EditText
-    private lateinit var repository: LanguageRepository
+    private lateinit var languageViewModel: LanguageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +33,7 @@ class StartFragment : Fragment() {
         yourLanguage = binding.editOwnLanguage
         desiredLanguage = binding.editForeignLanguage
 
-        repository = LanguageRepository(requireActivity().application)
+        languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
 
         MainActivity.UiController.hideBottomNav()
         MainActivity.UiController.hideToolbar()
@@ -44,9 +41,9 @@ class StartFragment : Fragment() {
         val buttonNext = binding.button;
         buttonNext.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
-                saveAndGoHome()
+                saveLanguages()
             } else {
-                displayToastError(R.string.validation_error_start_form)
+                MainActivity.displayToast(requireContext(),R.string.validation_error_start_form)
             }
         })
         checkLanguages()
@@ -57,23 +54,18 @@ class StartFragment : Fragment() {
         return yourLanguage.text.isNotEmpty() && desiredLanguage.text.isNotEmpty()
     }
 
-    private fun displayToastError(text: Int) {
-        val toast = Toast.makeText(requireContext(), text, Toast.LENGTH_LONG)
-        toast.show()
-    }
-
     private fun checkLanguages() {
-        val languages: LiveData<List<Language>> = repository.getLanguages()
-        languages.observe(viewLifecycleOwner) { languageList ->
+        languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             if (languageList.size == 2) {
                 goToHome()
             }
         }
     }
 
-    private fun saveAndGoHome() {
-        repository.insert(Language("your_language", yourLanguage.text.toString()))
-        repository.insert(Language("desired_language", desiredLanguage.text.toString()))
+    private fun saveLanguages() {
+        activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
+        languageViewModel.saveYourLanguage(yourLanguage.text.toString())
+        languageViewModel.saveDesiredLanguage(desiredLanguage.text.toString())
     }
 
     private fun goToHome() {

@@ -6,5 +6,4 @@
     <string name="your_language">Your language</string>
     <string name="incentive_foreign_language">Language, you\'re learning: </string>
     <string name="desired_language">Your new language</string>
-    <string name="validation_error_start_form">You need to provide two languages!</string>
 </resources>

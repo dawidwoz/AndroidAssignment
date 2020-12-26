@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Learn with Dawid</string>
     <string name="general_error">Something went wrong. Try again or contact support!</string>
+    <string name="validation_error_start_form">You need to provide two languages!</string>
 </resources>

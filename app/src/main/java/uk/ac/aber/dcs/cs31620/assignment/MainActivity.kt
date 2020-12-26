@@ -1,8 +1,14 @@
 package uk.ac.aber.dcs.cs31620.assignment
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -29,7 +35,29 @@ class MainActivity : AppCompatActivity() {
         fun showToolbar() {
             binding.toolbar.visibility = View.VISIBLE
         }
+
+        fun displayToast(content: Context, text: Int) {
+            val toast = Toast.makeText(content, text, Toast.LENGTH_LONG)
+            toast.show()
+        }
+
+        fun hideSoftKeyboard(activity: Activity) {
+            val inputMethodManager =
+                (activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+                    hideSoftInputFromWindow(
+                        activity.currentFocus!!.windowToken, 0)
+                }
+        }
+
+        fun hideSoftKeyboard(activity: FragmentActivity) {
+            val inputMethodManager =
+                (activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+                    hideSoftInputFromWindow(
+                        activity.currentFocus?.windowToken, 0)
+                }
+        }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
