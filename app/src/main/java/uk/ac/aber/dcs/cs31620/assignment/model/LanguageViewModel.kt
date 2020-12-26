@@ -15,11 +15,11 @@ class LanguageViewModel(application: Application) :  AndroidViewModel(applicatio
     }
 
     fun saveYourLanguage(value: String) {
-        repository.insert(Language(Common.YourLanguage.value, value))
+        repository.insertLanguage(Language(Common.YourLanguage.value, value))
     }
 
     fun saveDesiredLanguage(value: String) {
-        repository.insert(Language(Common.DesiredLanguage.value, value))
+        repository.insertLanguage(Language(Common.DesiredLanguage.value, value))
     }
 
     override fun onCleared() {

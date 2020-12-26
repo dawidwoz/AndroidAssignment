@@ -60,5 +60,4 @@ class SettingsFragment : Fragment() {
         languageViewModel.saveYourLanguage(yourLanguage.text.toString())
         languageViewModel.saveDesiredLanguage(desiredLanguage.text.toString())
     }
-
 }

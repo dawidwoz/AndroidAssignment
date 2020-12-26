@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface LanguagesDao {
+interface LanguageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLanguage(language: Language)
 

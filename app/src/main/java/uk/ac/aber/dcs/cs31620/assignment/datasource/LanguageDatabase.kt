@@ -6,12 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import uk.ac.aber.dcs.cs31620.assignment.model.Language
-import uk.ac.aber.dcs.cs31620.assignment.model.LanguagesDao
+import uk.ac.aber.dcs.cs31620.assignment.model.LanguageDao
+import uk.ac.aber.dcs.cs31620.assignment.model.Word
+import uk.ac.aber.dcs.cs31620.assignment.model.WordDao
 
-@Database(entities = [Language::class], version = 1)
+@Database(entities = [Language::class, Word::class], version = 1)
 abstract class LanguageDatabase : RoomDatabase(), RoomDatabaseInterface {
 
-    abstract override fun languagesDao(): LanguagesDao
+    abstract override fun languagesDao(): LanguageDao
+
+    abstract override fun wordDao(): WordDao
 
     override fun closeDb() {
         instance?.close()
@@ -45,5 +49,4 @@ abstract class LanguageDatabase : RoomDatabase(), RoomDatabaseInterface {
             }
         }
     }
-
 }
