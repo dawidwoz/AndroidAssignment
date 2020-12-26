@@ -22,7 +22,6 @@ import uk.ac.aber.dcs.cs31620.assignment.model.Language
 
 class StartFragment : Fragment() {
 
-    private lateinit var startViewModel: StartViewModel
     private lateinit var binding: FragmentStartBinding
     private lateinit var yourLanguage: EditText
     private lateinit var desiredLanguage: EditText
@@ -34,7 +33,6 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): ConstraintLayout {
         binding = FragmentStartBinding.inflate(layoutInflater)
-        startViewModel = ViewModelProvider(this).get(StartViewModel::class.java)
         yourLanguage = binding.editOwnLanguage
         desiredLanguage = binding.editForeignLanguage
 
@@ -81,9 +79,7 @@ class StartFragment : Fragment() {
     private fun goToHome() {
         val navController = findNavController()
         val navOption = NavOptions.Builder().setPopUpTo(R.id.navigation_start, true).build()
-        if(R.id.action_start_to_home != null) {
-                navController.navigate(R.id.action_start_to_home, null, navOption)
-        }
+        navController.navigate(R.id.action_start_to_home, null, navOption)
         MainActivity.UiController.showBottomNav()
         MainActivity.UiController.showToolbar()
     }
