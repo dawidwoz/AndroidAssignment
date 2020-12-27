@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
+import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentHomeBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
@@ -35,7 +38,7 @@ class HomeFragment : Fragment() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach lit@{
                 when (it.langauge) {
-                    "your_language" -> {
+                    Common.DesiredLanguage.value -> {
                         yourLanguage.setText(it.value)
                         return@lit
                     }
@@ -47,6 +50,16 @@ class HomeFragment : Fragment() {
             wordCount.setText(wordsList.size.toString())
         }
 
+        val buttonAdd = binding.addWordButton;
+        buttonAdd.setOnClickListener(View.OnClickListener {
+            goToAdd()
+        })
+
         return binding.root
+    }
+
+    private fun goToAdd() {
+        val navController = findNavController()
+        navController.navigate(R.id.action_start_to_add)
     }
 }

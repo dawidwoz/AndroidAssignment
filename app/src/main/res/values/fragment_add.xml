@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_add">Add new word</string>
+    <string name="add_original_word">Word in </string>
+    <string name="add_translation_word">Word in </string>
+    <string name="add_new_words">You\'ve already added:</string>
+</resources>

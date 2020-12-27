@@ -7,8 +7,9 @@ import uk.ac.aber.dcs.cs31620.assignment.datasource.LanguageRepository
 
 class WordViewModel(application: Application) :  AndroidViewModel(application)  {
     private val repository: LanguageRepository = LanguageRepository(application)
-    var wordsList: LiveData<List<Word>> = repository.getWords()
-    private set
+    private var wordsList: LiveData<List<Word>> = repository.getWords()
+
+
 
     fun getWords(): LiveData<List<Word>> {
         return wordsList
