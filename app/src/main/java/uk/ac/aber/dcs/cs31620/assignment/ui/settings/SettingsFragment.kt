@@ -45,7 +45,7 @@ class SettingsFragment : Fragment() {
                 saveLanguages()
                 MainActivity.UiController.displayToast(requireContext(),R.string.setting_success_update)
             } else {
-                MainActivity.UiController.displayToast(requireContext(),R.string.validation_error_start_form)
+                MainActivity.UiController.displayToast(requireContext(),R.string.language_validation_error_start_form)
             }
         })
         return binding.root

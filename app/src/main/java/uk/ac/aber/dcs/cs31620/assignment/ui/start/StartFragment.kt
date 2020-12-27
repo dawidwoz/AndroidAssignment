@@ -43,7 +43,7 @@ class StartFragment : Fragment() {
             if (validateForm()) {
                 saveLanguages()
             } else {
-                MainActivity.displayToast(requireContext(),R.string.validation_error_start_form)
+                MainActivity.displayToast(requireContext(),R.string.language_validation_error_start_form)
             }
         })
         checkLanguages()

@@ -23,7 +23,7 @@ class WordsListAdapter (private val context: Context?) : RecyclerView.Adapter<Wo
         }
 
         fun bindDataSet(word: Word) {
-            wordOriginal.text = word.orginal
+            wordOriginal.text = word.original
             wordTranslation.text = word.translation
         }
     }

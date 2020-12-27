@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "words")
 data class Word(
-    @PrimaryKey(autoGenerate = true)
+        @PrimaryKey(autoGenerate = true)
     @NonNull
     var id: Int = 0,
-    @NonNull
-    var orginal: String = "",
-    @NonNull
+        @NonNull
+    var original: String = "",
+        @NonNull
     var translation: String = "",
-    @NonNull
+        @NonNull
     var failed: Int = 0
 ) { }
