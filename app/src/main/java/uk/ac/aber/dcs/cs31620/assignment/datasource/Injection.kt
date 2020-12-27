@@ -4,5 +4,5 @@ import android.content.Context
 
 object Injection {
     fun getDatabase(context: Context): RoomDatabaseInterface =
-        LanguageDatabase.getDatabase(context)!!
+        AppDatabase.getDatabase(context)!!
 }

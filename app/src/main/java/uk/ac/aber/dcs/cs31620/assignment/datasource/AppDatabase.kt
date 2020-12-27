@@ -11,7 +11,7 @@ import uk.ac.aber.dcs.cs31620.assignment.model.Word
 import uk.ac.aber.dcs.cs31620.assignment.model.WordDao
 
 @Database(entities = [Language::class, Word::class], version = 1)
-abstract class LanguageDatabase : RoomDatabase(), RoomDatabaseInterface {
+abstract class AppDatabase : RoomDatabase(), RoomDatabaseInterface {
 
     abstract override fun languagesDao(): LanguageDao
 
@@ -23,15 +23,15 @@ abstract class LanguageDatabase : RoomDatabase(), RoomDatabaseInterface {
     }
 
     companion object {
-        private var instance: LanguageDatabase? = null
+        private var instance: AppDatabase? = null
 
-        fun getDatabase(context: Context): LanguageDatabase? {
+        fun getDatabase(context: Context): AppDatabase? {
             synchronized(this) {
                 if (instance == null) {
                     instance =
-                        Room.databaseBuilder<LanguageDatabase>(
+                        Room.databaseBuilder<AppDatabase>(
                             context.applicationContext,
-                            LanguageDatabase::class.java,
+                            AppDatabase::class.java,
                             "language_database"
                         )
                             .addCallback(roomDatabaseCallback(context))

@@ -17,8 +17,8 @@ class AddViewModel(application: Application) :  AndroidViewModel(application) {
         return wordsList
     }
 
-    fun addWord(word: Word) {
-        wordsList.value?.add(word)
+    fun addWord(original: String, translation: String) {
+        wordsList.value?.add(Word(original = original, translation = translation))
         /*
         * The line below is a cheeky way to refresh a view data model.
         * It comes from: https://stackoverflow.com/questions/47941537/notify-observer-when-item-is-added-to-list-of-livedata/49022687#49022687

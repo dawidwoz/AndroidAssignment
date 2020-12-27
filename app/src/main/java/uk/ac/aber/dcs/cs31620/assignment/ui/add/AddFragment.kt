@@ -14,7 +14,6 @@ import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentAddBinding
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
-import uk.ac.aber.dcs.cs31620.assignment.model.Word
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 import uk.ac.aber.dcs.cs31620.assignment.ui.common.WordsListAdapter
 
@@ -90,7 +89,8 @@ class AddFragment : Fragment() {
 
     private fun saveWord() {
         activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
-        addViewModel.addWord(Word(original = editYourWord.text.toString(), translation = editDesiredWord.text.toString()))
+        addViewModel.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
+        wordsViewModel.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
         editYourWord.setText("")
         editDesiredWord.setText("")
     }

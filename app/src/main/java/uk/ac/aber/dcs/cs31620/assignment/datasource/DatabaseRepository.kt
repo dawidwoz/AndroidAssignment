@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import uk.ac.aber.dcs.cs31620.assignment.model.Language
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
 
-class LanguageRepository(application: Application) {
+class DatabaseRepository(application: Application) {
     private val languagesDao = Injection.getDatabase(application).languagesDao()
     private val wordsDao = Injection.getDatabase(application).wordDao()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
