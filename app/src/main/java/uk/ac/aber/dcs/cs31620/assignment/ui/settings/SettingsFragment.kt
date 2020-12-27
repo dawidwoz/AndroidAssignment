@@ -1,5 +1,7 @@
 package uk.ac.aber.dcs.cs31620.assignment.ui.settings
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,12 +46,12 @@ class SettingsFragment : Fragment() {
         val buttonSave = binding.settingSaveButton;
         buttonSave.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
-                saveLanguages()
-                MainActivity.UiController.displayToast(requireContext(),R.string.setting_success_update)
+                confirmChangeAlert()
             } else {
                 MainActivity.UiController.displayToast(requireContext(),R.string.language_validation_error_start_form)
             }
         })
+
         return binding.root
     }
 
@@ -57,10 +59,25 @@ class SettingsFragment : Fragment() {
         return yourLanguage.text.isNotEmpty() && desiredLanguage.text.isNotEmpty()
     }
 
+    private fun confirmChangeAlert() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    saveLanguages()
+                }
+            }
+        }
+        builder.setMessage(R.string.setting_confirm_message)
+                .setPositiveButton(R.string.yes, dialogClickListener)
+                .setNegativeButton(R.string.no, dialogClickListener).show()
+    }
+
     private fun saveLanguages() {
         activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
         languageViewModel.saveYourLanguage(yourLanguage.text.toString())
         languageViewModel.saveDesiredLanguage(desiredLanguage.text.toString())
         wordViewModel.deleteAllWord()
+        MainActivity.UiController.displayToast(requireContext(),R.string.setting_success_update)
     }
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="setting_success_update">Your setting has been successfully updated!</string>
+    <string name="setting_confirm_message">Are you sure? Present vocabulary will be deleted!</string>
 </resources>
