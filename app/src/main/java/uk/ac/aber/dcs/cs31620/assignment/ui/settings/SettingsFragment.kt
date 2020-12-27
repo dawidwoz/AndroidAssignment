@@ -12,10 +12,12 @@ import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentSettingsBinding
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
+import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
 class SettingsFragment : Fragment() {
 
     private lateinit var languageViewModel: LanguageViewModel
+    private lateinit var wordViewModel: WordViewModel
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var yourLanguage: EditText
     private lateinit var desiredLanguage: EditText
@@ -26,8 +28,8 @@ class SettingsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(layoutInflater)
-        languageViewModel =
-                ViewModelProvider(this).get(LanguageViewModel::class.java)
+        languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
+        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         yourLanguage = binding.settingEditYourLanguage
         desiredLanguage = binding.settingEditDesiredLanguage
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
@@ -59,5 +61,6 @@ class SettingsFragment : Fragment() {
         activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
         languageViewModel.saveYourLanguage(yourLanguage.text.toString())
         languageViewModel.saveDesiredLanguage(desiredLanguage.text.toString())
+        wordViewModel.deleteAllWord()
     }
 }

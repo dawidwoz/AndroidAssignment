@@ -17,6 +17,10 @@ class WordViewModel(application: Application) :  AndroidViewModel(application)  
         repository.insertWord(Word(original = original, translation = translation))
     }
 
+    fun deleteAllWord() {
+        repository.deleteAllWords();
+    }
+
     override fun onCleared() {
         super.onCleared()
     }

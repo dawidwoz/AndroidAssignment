@@ -34,11 +34,11 @@ class WordsListAdapter (private val context: Context?) : RecyclerView.Adapter<Wo
             parent: ViewGroup,
             viewType: Int
     ): WordsListAdapter.ViewHolder {
-        val catItemBinding = WordItemBinding.inflate(LayoutInflater.from(context), parent, false)
+        val wordItemBinding = WordItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(
-                catItemBinding.wordItem,
-                catItemBinding.wordOriginal,
-                catItemBinding.wordTranslation
+                wordItemBinding.wordItem,
+                wordItemBinding.wordOriginal,
+                wordItemBinding.wordTranslation
         )
     }
 
