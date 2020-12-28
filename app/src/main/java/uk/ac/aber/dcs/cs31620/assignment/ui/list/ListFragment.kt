@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentListBinding
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
@@ -39,7 +41,7 @@ class ListFragment : Fragment() {
 
         wordViewModel.getWords().observe(viewLifecycleOwner) { wordList ->
             wordsListAdapter.changeDataSet(wordList as MutableList<Word>)
-            if(wordList.isEmpty()) {
+            if (wordList.isEmpty()) {
                 binding.listWordTitle.visibility = View.GONE
                 binding.listTextNoWords.visibility = View.VISIBLE
             } else {
@@ -64,5 +66,26 @@ class ListFragment : Fragment() {
 
         wordsListAdapter = WordsListAdapter(context)
         listWords.adapter = wordsListAdapter
+        listWords.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (dy > 0) { //Scrolling down
+                    MainActivity.hideBottomNav()
+                } else if (dy < 0) { //Scrolling up
+                    MainActivity.showBottomNav()
+                }
+
+                if (gridLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
+                    MainActivity.showBottomNav()
+                }
+
+                if (gridLayoutManager.findLastVisibleItemPosition() == gridLayoutManager.itemCount - 1) {
+                    MainActivity.hideBottomNav()
+                }
+
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        }
+        )
     }
 }
