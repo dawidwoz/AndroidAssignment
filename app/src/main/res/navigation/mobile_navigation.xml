@@ -41,8 +41,15 @@
         android:label="@string/menu_list"
         tools:layout="@layout/fragment_list">
         <action
-            android:id="@+id/action_start_to_add"
+            android:id="@+id/action_list_to_add"
             app:destination="@id/navigation_add"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_list_to_edit"
+            app:destination="@id/navigation_edit"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -61,6 +68,12 @@
         android:name="uk.ac.aber.dcs.cs31620.assignment.ui.add.AddFragment"
         android:label="@string/menu_add"
         tools:layout="@layout/fragment_learn" />
+
+    <fragment
+        android:id="@+id/navigation_edit"
+        android:name="uk.ac.aber.dcs.cs31620.assignment.ui.edit.EditFragment"
+        android:label="@string/menu_edit"
+        tools:layout="@layout/fragment_edit" />
 
     <fragment
         android:id="@+id/navigation_test"

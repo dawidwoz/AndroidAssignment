@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="menu_add">Add new word</string>
+    <string name="menu_edit">Edit word</string>
     <string name="menu_home">Home</string>
     <string name="menu_list">Your worlds</string>
     <string name="menu_learn">Learn</string>

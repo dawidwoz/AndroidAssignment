@@ -55,7 +55,12 @@ class ListFragment : Fragment() {
 
     private fun goToAdd() {
         val navController = findNavController()
-        navController.navigate(R.id.action_start_to_add)
+        navController.navigate(R.id.action_list_to_add)
+    }
+
+    private fun goToEdit() {
+        val navController = findNavController()
+        navController.navigate(R.id.action_list_to_edit)
     }
 
     private fun addWordsRecyclerView() {
@@ -65,13 +70,19 @@ class ListFragment : Fragment() {
         listWords.layoutManager = gridLayoutManager
 
         wordsListAdapter = WordsListAdapter(context)
+
+        wordsListAdapter.clickListener = View.OnClickListener {
+            goToEdit()
+        };
+
         listWords.adapter = wordsListAdapter
+
         listWords.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                if (dy > 0) { //Scrolling down
+                if (dy > 0) { // Scrolling down
                     MainActivity.hideBottomNav()
-                } else if (dy < 0) { //Scrolling up
+                } else if (dy < 0) { // Scrolling up
                     MainActivity.showBottomNav()
                 }
 
