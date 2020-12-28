@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentAddBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 import uk.ac.aber.dcs.cs31620.assignment.ui.common.WordsListAdapter
@@ -48,8 +49,8 @@ class AddFragment : Fragment() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach {
                 when (it.langauge) {
-                    "your_language" -> yourWord.append(" " + it.value + ":")
-                    "desired_language" -> desiredWord.append(" " + it.value + ":")
+                    Common.YourLanguage.value -> yourWord.append(" " + it.value + ":")
+                    Common.DesiredLanguage.value -> desiredWord.append(" " + it.value + ":")
                     else -> MainActivity.UiController.displayToast(requireContext(), R.string.general_error)
                 }
             }

@@ -16,6 +16,7 @@
         android:clickable="true"
         android:contentDescription="@string/home_add_description"
         android:src="@drawable/ic_baseline_add_24"
+        app:layout_dodgeInsetEdges="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

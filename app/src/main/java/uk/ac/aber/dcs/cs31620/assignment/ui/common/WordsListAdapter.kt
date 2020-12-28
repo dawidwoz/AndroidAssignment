@@ -16,7 +16,8 @@ class WordsListAdapter (private val context: Context?) : RecyclerView.Adapter<Wo
     inner class ViewHolder(
             itemView: View,
             private val wordOriginal: TextView,
-            private val wordTranslation: TextView
+            private val wordTranslation: TextView,
+            private val wordId: TextView
     ) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener(clickListener)
@@ -25,6 +26,7 @@ class WordsListAdapter (private val context: Context?) : RecyclerView.Adapter<Wo
         fun bindDataSet(word: Word) {
             wordOriginal.text = word.original
             wordTranslation.text = word.translation
+            wordId.text = word.id.toString()
         }
     }
 
@@ -38,7 +40,8 @@ class WordsListAdapter (private val context: Context?) : RecyclerView.Adapter<Wo
         return ViewHolder(
                 wordItemBinding.wordItem,
                 wordItemBinding.wordOriginal,
-                wordItemBinding.wordTranslation
+                wordItemBinding.wordTranslation,
+                wordItemBinding.wordId
         )
     }
 

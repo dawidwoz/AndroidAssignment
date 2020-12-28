@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.word_item.view.*
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentListBinding
@@ -58,9 +61,14 @@ class ListFragment : Fragment() {
         navController.navigate(R.id.action_list_to_add)
     }
 
-    private fun goToEdit() {
+    private fun goToEdit(originalWord: String, desiredWord: String, idWord: String) {
         val navController = findNavController()
-        navController.navigate(R.id.action_list_to_edit)
+        val bundle = bundleOf(
+            "originalWord" to originalWord,
+            "translationWord" to desiredWord,
+            "idWord" to idWord
+        )
+        navController.navigate(R.id.action_list_to_edit, bundle)
     }
 
     private fun addWordsRecyclerView() {
@@ -72,7 +80,11 @@ class ListFragment : Fragment() {
         wordsListAdapter = WordsListAdapter(context)
 
         wordsListAdapter.clickListener = View.OnClickListener {
-            goToEdit()
+            goToEdit(
+                it.word_original.text.toString(),
+                it.word_translation.text.toString(),
+                it.word_id.text.toString()
+            )
         };
 
         listWords.adapter = wordsListAdapter

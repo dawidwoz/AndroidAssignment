@@ -53,7 +53,16 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="originalWord"
+                app:argType="string"
+                android:defaultValue="" />
+            <argument
+                android:name="translationWord"
+                app:argType="string"
+                android:defaultValue="" />
+        </action>
     </fragment>
 
     <fragment
@@ -73,7 +82,16 @@
         android:id="@+id/navigation_edit"
         android:name="uk.ac.aber.dcs.cs31620.assignment.ui.edit.EditFragment"
         android:label="@string/menu_edit"
-        tools:layout="@layout/fragment_edit" />
+        tools:layout="@layout/fragment_edit">
+        <argument
+            android:name="originalWord"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="translationWord"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_test"
