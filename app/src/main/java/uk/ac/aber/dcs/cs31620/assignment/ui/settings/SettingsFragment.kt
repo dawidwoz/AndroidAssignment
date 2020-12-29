@@ -13,6 +13,7 @@ import androidx.lifecycle.observe
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentSettingsBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
@@ -37,8 +38,8 @@ class SettingsFragment : Fragment() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach {
                 when (it.langauge) {
-                    "your_language" -> yourLanguage.setText(it.value)
-                    "desired_language" -> desiredLanguage.setText(it.value)
+                    Common.YourLanguage.value -> yourLanguage.setText(it.value)
+                    Common.DesiredLanguage.value -> desiredLanguage.setText(it.value)
                     else -> MainActivity.UiController.displayToast(requireContext(), R.string.general_error)
                 }
             }

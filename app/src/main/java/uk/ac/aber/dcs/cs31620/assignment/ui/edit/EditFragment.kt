@@ -1,5 +1,7 @@
 package uk.ac.aber.dcs.cs31620.assignment.ui.edit
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -58,7 +60,7 @@ class EditFragment : Fragment() {
 
         val buttonDelete = binding.editDeleteButton;
         buttonDelete.setOnClickListener(View.OnClickListener {
-            deleteWord()
+            confirmDeleteAlert()
         })
 
         fillEditView();
@@ -75,8 +77,24 @@ class EditFragment : Fragment() {
         goToSource()
     }
 
+    private fun confirmDeleteAlert() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    deleteWord()
+                }
+            }
+        }
+        builder.setMessage(R.string.edit_delete_confirm_message)
+            .setPositiveButton(R.string.yes, dialogClickListener)
+            .setNegativeButton(R.string.no, dialogClickListener).show()
+    }
+
     private fun deleteWord() {
-        Log.d("DELETE", "There is a delete function")
+        activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
+        wordsViewModel.deleteWordById(wordId)
+        MainActivity.displayToast(requireContext(), R.string.edit_delete_word_success)
         goToSource()
     }
 

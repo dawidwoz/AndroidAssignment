@@ -41,6 +41,12 @@ class DatabaseRepository(application: Application) {
         }
     }
 
+    fun deleteWord(id: Int) {
+        coroutineScope.launch(Dispatchers.IO) {
+            wordsDao.deleteWord(id)
+        }
+    }
+
     fun updateWord(word: Word) {
         coroutineScope.launch(Dispatchers.IO) {
             wordsDao.updateWord(word)
