@@ -57,4 +57,8 @@ class DatabaseRepository(application: Application) {
         return wordsDao.getWords()
     }
 
+    fun getRandomWords(questionNumber: Int): LiveData<List<Word>> {
+        return wordsDao.getRandomWords(questionNumber)
+    }
+
 }

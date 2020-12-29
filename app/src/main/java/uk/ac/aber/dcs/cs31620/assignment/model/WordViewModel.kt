@@ -13,6 +13,10 @@ class WordViewModel(application: Application) :  AndroidViewModel(application)  
         return wordsList
     }
 
+    fun getRandomWords(questionNumber: Int): LiveData<List<Word>> {
+        return repository.getRandomWords(questionNumber)
+    }
+
     fun addWord(original: String, translation: String) {
         repository.insertWord(Word(original = original, translation = translation))
     }

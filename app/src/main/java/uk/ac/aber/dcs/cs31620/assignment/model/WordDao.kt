@@ -20,4 +20,6 @@ interface WordDao {
     @Query("SELECT * FROM words")
     fun getWords(): LiveData<List<Word>>
 
+    @Query("""SELECT * FROM words ORDER BY RANDOM() LIMIT :questionNumber""")
+    fun getRandomWords(questionNumber: Int): LiveData<List<Word>>
 }
