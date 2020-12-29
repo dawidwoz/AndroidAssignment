@@ -62,6 +62,10 @@
                 android:name="translationWord"
                 app:argType="string"
                 android:defaultValue="" />
+            <argument
+                android:name="idWord"
+                app:argType="string"
+                android:defaultValue="" />
         </action>
     </fragment>
 
@@ -89,6 +93,10 @@
             android:defaultValue="" />
         <argument
             android:name="translationWord"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="idWord"
             app:argType="string"
             android:defaultValue="" />
     </fragment>

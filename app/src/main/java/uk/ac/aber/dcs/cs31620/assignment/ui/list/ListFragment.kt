@@ -35,6 +35,8 @@ class ListFragment : Fragment() {
 
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 
+        MainActivity.hideToolbar()
+
         val buttonAdd = binding.addWordButton;
         buttonAdd.setOnClickListener(View.OnClickListener {
             goToAdd()
@@ -54,6 +56,16 @@ class ListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onPause() {
+        MainActivity.showToolbar()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        MainActivity.showToolbar()
+        super.onDestroy()
     }
 
     private fun goToAdd() {

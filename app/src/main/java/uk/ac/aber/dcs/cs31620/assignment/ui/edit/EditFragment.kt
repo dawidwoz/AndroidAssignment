@@ -9,15 +9,19 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentEditBinding
 import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
+import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
 class EditFragment : Fragment() {
     private lateinit var binding : FragmentEditBinding
     private lateinit var languageViewModel: LanguageViewModel
+    private lateinit var wordsViewModel: WordViewModel
+    private var wordId: Int = 0
 
     private lateinit var editYourWord: EditText
     private lateinit var editDesiredWord: EditText
@@ -29,6 +33,7 @@ class EditFragment : Fragment() {
     ): View? {
         binding = FragmentEditBinding.inflate(layoutInflater)
         languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
+        wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         editYourWord = binding.editEditYourWord
         editDesiredWord = binding.editEditDesiredWord
 
@@ -64,11 +69,15 @@ class EditFragment : Fragment() {
     }
 
     private fun changeWord() {
-        Log.d("CHANGE", "There is a change function")
+        activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
+        wordsViewModel.updateWordById(wordId,editYourWord.text.toString(), editDesiredWord.text.toString())
+        MainActivity.displayToast(requireContext(), R.string.edit_change_word_success)
+        goToSource()
     }
 
     private fun deleteWord() {
         Log.d("DELETE", "There is a delete function")
+        goToSource()
     }
 
     private fun validateForm(): Boolean {
@@ -79,13 +88,36 @@ class EditFragment : Fragment() {
         arguments?.getString("originalWord")?.let{
             editYourWord.setText(it)
         } ?: run {
-            MainActivity.displayToast(requireContext(), R.string.general_error)
+            handleError()
         };
+
         arguments?.getString("translationWord")?.let{
             editDesiredWord.setText(it)
         } ?: run {
-            MainActivity.displayToast(requireContext(), R.string.general_error)
+            handleError()
         };
+
+        arguments?.getString("idWord")?.let{
+            wordId = try {
+                it.toInt()
+            } catch (nfe: NumberFormatException) {
+                handleError()
+                0
+            }
+        } ?: run {
+            wordId = 0;
+            handleError()
+        };
+    }
+
+    private fun handleError() {
+        MainActivity.displayToast(requireContext(), R.string.general_error)
+        goToSource()
+    }
+
+    private fun goToSource() {
+        val navController = findNavController()
+        navController.popBackStack()
     }
 
 }

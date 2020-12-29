@@ -17,6 +17,10 @@ class WordViewModel(application: Application) :  AndroidViewModel(application)  
         repository.insertWord(Word(original = original, translation = translation))
     }
 
+    fun updateWordById(id: Int, original: String, translation: String) {
+        repository.updateWord(Word(id = id, original = original, translation = translation, failed = 0))
+    }
+
     fun deleteAllWord() {
         repository.deleteAllWords();
     }

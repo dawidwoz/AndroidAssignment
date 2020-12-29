@@ -41,6 +41,12 @@ class DatabaseRepository(application: Application) {
         }
     }
 
+    fun updateWord(word: Word) {
+        coroutineScope.launch(Dispatchers.IO) {
+            wordsDao.updateWord(word)
+        }
+    }
+
     fun getWords(): LiveData<List<Word>> {
         return wordsDao.getWords()
     }
