@@ -1,8 +1,12 @@
 package uk.ac.aber.dcs.cs31620.assignment
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -18,6 +22,7 @@ import uk.ac.aber.dcs.cs31620.assignment.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     companion object UiController {
         private lateinit var binding: ActivityMainBinding
+        private var warnWhenBack: Boolean = false
 
         fun hideBottomNav() {
             binding.navView.visibility = View.GONE
@@ -35,25 +40,25 @@ class MainActivity : AppCompatActivity() {
             binding.toolbar.visibility = View.VISIBLE
         }
 
+        fun setWarnWhenBack(warnWhenBack: Boolean) {
+            this.warnWhenBack = warnWhenBack;
+        }
+
+        fun shouldWarnWhenBack(): Boolean {
+            return warnWhenBack;
+        }
+
         fun displayToast(content: Context, text: Int) {
             val toast = Toast.makeText(content, text, Toast.LENGTH_LONG)
             toast.show()
         }
 
-        fun hideSoftKeyboard(activity: Activity) {
-            val inputMethodManager =
-                (activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-                    hideSoftInputFromWindow(
-                        activity.currentFocus!!.windowToken, 0)
-                }
-        }
 
         fun hideSoftKeyboard(activity: FragmentActivity) {
-            val inputMethodManager =
-                (activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-                    hideSoftInputFromWindow(
-                        activity.currentFocus?.windowToken, 0)
-                }
+                    (activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+                        hideSoftInputFromWindow(
+                                activity.currentFocus?.windowToken, 0)
+                    }
         }
     }
 
@@ -79,5 +84,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    override fun onBackPressed() {
+        if (UiController.shouldWarnWhenBack()) {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        super.onBackPressed()
+                    }
+                }
+            }
+            builder.setMessage(R.string.going_back_warning)
+                    .setPositiveButton(R.string.yes, dialogClickListener)
+                    .setNegativeButton(R.string.no, dialogClickListener).show()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
 
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exam_warning_button_submit">Are you sure you want to submit your answers?</string>
+</resources>

@@ -4,4 +4,5 @@
     <string name="language_validation_error_start_form">You need to provide two languages!</string>
     <string name="word_validation_error_start_form">You need to provide original word and translation!</string>
     <string name="question_number_validation_error_test_form">The given value is incorrect!</string>
+    <string name="going_back_warning">Are you sure you want to exit? Your progress will be lost!</string>
 </resources>
