@@ -3,4 +3,5 @@
     <string name="general_error">Something went wrong. Try again or contact support!</string>
     <string name="language_validation_error_start_form">You need to provide two languages!</string>
     <string name="word_validation_error_start_form">You need to provide original word and translation!</string>
+    <string name="question_number_validation_error_test_form">The given value is incorrect!</string>
 </resources>
