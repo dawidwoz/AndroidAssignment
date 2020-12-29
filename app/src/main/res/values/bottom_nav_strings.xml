@@ -6,5 +6,6 @@
     <string name="menu_list">Your worlds</string>
     <string name="menu_learn">Learn</string>
     <string name="menu_test">Test</string>
+    <string name="menu_exam">Exam</string>
     <string name="menu_setting">Settings</string>
 </resources>

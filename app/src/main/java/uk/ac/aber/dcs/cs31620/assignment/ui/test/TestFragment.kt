@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentTestBinding
@@ -19,6 +21,7 @@ class TestFragment : Fragment() {
     private lateinit var wordsViewModel: WordViewModel
     private lateinit var wordCount: EditText
     private var maxQuestionNumber: Int = 0
+    private var questionNumber: Int = 0
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -38,7 +41,7 @@ class TestFragment : Fragment() {
         val buttonStart = binding.testButtonStart;
         buttonStart.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
-                
+                goToExam()
             } else {
                 MainActivity.UiController.displayToast(requireContext(), R.string.question_number_validation_error_test_form)
             }
@@ -47,8 +50,16 @@ class TestFragment : Fragment() {
         return binding.root
     }
 
+    private fun goToExam() {
+        val navController = findNavController()
+        val bundle = bundleOf(
+                "numberQuestion" to questionNumber
+        )
+        navController.navigate(R.id.action_test_to_exam, bundle)
+    }
+
     private fun checkIfInRange(text: String) : Boolean {
-        var questionNumber = try {
+        questionNumber = try {
             text.toInt()
         } catch (nfe: NumberFormatException) {
             MainActivity.UiController.displayToast(requireContext(), R.string.question_number_validation_error_test_form)

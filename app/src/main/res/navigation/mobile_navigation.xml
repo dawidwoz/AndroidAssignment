@@ -105,7 +105,31 @@
         android:id="@+id/navigation_test"
         android:name="uk.ac.aber.dcs.cs31620.assignment.ui.test.TestFragment"
         android:label="@string/menu_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test">
+        <action
+            android:id="@+id/action_test_to_exam"
+            app:destination="@id/navigation_exam"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="numberQuestion"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_exam"
+        android:name="uk.ac.aber.dcs.cs31620.assignment.ui.exam.ExamFragment"
+        android:label="@string/menu_exam"
+        tools:layout="@layout/fragment_exam">
+        <argument
+            android:name="numberQuestion"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
