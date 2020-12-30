@@ -44,9 +44,8 @@ class ExamFragment : Fragment()  {
             examListAdapter.changeDataSet(it as MutableList<Word>)
         }
 
-        val buttonSubmit = binding.examButtonSubmit;
-        buttonSubmit.setOnClickListener(View.OnClickListener {
-                confirmSubmitAlert()
+        examListAdapter.clickButtonItem = (View.OnClickListener {
+            confirmSubmitAlert()
         })
 
         MainActivity.hideToolbar()
