@@ -1,11 +1,14 @@
 package uk.ac.aber.dcs.cs31620.assignment.ui.exam
 
 import android.content.Context
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.text.bold
 import androidx.recyclerview.widget.RecyclerView
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ExamItemBinding
@@ -33,7 +36,7 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
                 return ViewHolderExamItem(
                         examItemBinding.examItem,
                         examItemBinding.examOriginal,
-                        examItemBinding.examTranslation,
+                        examItemBinding.examOriginal,
                         examItemBinding.examWordId
                 )
             }
@@ -45,7 +48,7 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.exam_item -> (holder as ViewHolderExamItem).bindDataSet(dataSet[position])
+            R.layout.exam_item -> (holder as ViewHolderExamItem).bindDataSet(dataSet[position], position+1)
             R.layout.exam_submit_button -> (holder as ViewHolderSubmitButton).bind()
         }
     }
@@ -69,9 +72,14 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
             itemView.setOnClickListener(clickListenerItem)
         }
 
-        fun bindDataSet(word: Word) {
-            examOriginal.text = word.original
-            examTranslation.text = word.translation
+        fun bindDataSet(word: Word, questionNumber: Int) {
+            val questionText = context?.getString(R.string.exam_question_begin)
+            val wordToTranslate = SpannableStringBuilder()
+                    .append( "$questionNumber. $questionText ")
+                    .bold { append(word.original) }
+            wordToTranslate.setSpan(RelativeSizeSpan(1.5f), wordToTranslate.length-word.original.length,wordToTranslate.length, 0);
+            examOriginal.setText(wordToTranslate)
+            //examTranslation.text = word.translation
             examWordId.text = word.id.toString()
         }
     }
