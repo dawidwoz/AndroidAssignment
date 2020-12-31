@@ -4,5 +4,6 @@ enum class Common(val value: String) {
     DatabaseName("language_database"),
     YourLanguage("your_language"),
     DesiredLanguage("desired_language"),
+    ArgumentNumberQuestion("numberQuestion"),
     TAG_QUESTION("QUESTION")
 }

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentTestBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
 class TestFragment : Fragment() {
@@ -54,7 +55,7 @@ class TestFragment : Fragment() {
     private fun goToExam() {
         val navController = findNavController()
         val bundle = bundleOf(
-                "numberQuestion" to questionNumber
+                Common.ArgumentNumberQuestion.value to questionNumber
         )
         navController.navigate(R.id.action_test_to_exam, bundle)
     }

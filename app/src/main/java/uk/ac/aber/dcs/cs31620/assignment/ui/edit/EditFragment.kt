@@ -69,6 +69,11 @@ class EditFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroy() {
+        MainActivity.UiController.showBottomNav()
+        super.onDestroy()
+    }
+
     private fun changeWord() {
         activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
         wordsViewModel.updateWordById(wordId,editYourWord.text.toString(), editDesiredWord.text.toString())

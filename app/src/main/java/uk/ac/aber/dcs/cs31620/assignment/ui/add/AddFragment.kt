@@ -37,40 +37,16 @@ class AddFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         addViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
-        val yourWord = binding.addYourWord
-        val desiredWord = binding.addDesiredWord
-        val addNewWord = binding.addNewWords
-
         editYourWord = binding.addEditYourWord
         editDesiredWord = binding.addEditDesiredWord
 
-        languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
-            languageList.forEach {
-                when (it.langauge) {
-                    Common.YourLanguage.value -> yourWord.append(" " + it.value + ":")
-                    Common.DesiredLanguage.value -> desiredWord.append(" " + it.value + ":")
-                    else -> MainActivity.UiController.displayToast(requireContext(), R.string.general_error)
-                }
-            }
-        }
+        addLanguageInfo()
 
-        addViewModel.getWords().observe(viewLifecycleOwner) { wordList ->
-            wordsListAdapter.changeDataSet(wordList)
-            if(wordList.size > 0) {
-                addNewWord.visibility = View.VISIBLE
-            }
-        }
+        checkIfThereWords()
 
         addWordsRecyclerView()
 
-        val buttonNext = binding.addAddButton;
-        buttonNext.setOnClickListener(View.OnClickListener {
-            if (validateForm()) {
-                saveWord()
-            } else {
-                MainActivity.displayToast(requireContext(),R.string.word_validation_error_start_form)
-            }
-        })
+        addClickHandler()
 
         MainActivity.UiController.hideBottomNav()
 
@@ -78,8 +54,8 @@ class AddFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         MainActivity.UiController.showBottomNav()
+        super.onDestroy()
     }
 
     private fun validateForm(): Boolean {
@@ -92,6 +68,42 @@ class AddFragment : Fragment() {
         wordsViewModel.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
         editYourWord.setText("")
         editDesiredWord.setText("")
+    }
+
+    private fun addLanguageInfo() {
+        val yourWord = binding.addYourWord
+        val desiredWord = binding.addDesiredWord
+
+        languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
+            languageList.forEach {
+                when (it.langauge) {
+                    Common.YourLanguage.value -> yourWord.append(" " + it.value + ":")
+                    Common.DesiredLanguage.value -> desiredWord.append(" " + it.value + ":")
+                    else -> MainActivity.UiController.displayToast(requireContext(), R.string.general_error)
+                }
+            }
+        }
+    }
+
+    private fun checkIfThereWords() {
+        val addNewWord = binding.addNewWords
+        addViewModel.getWords().observe(viewLifecycleOwner) { wordList ->
+            wordsListAdapter.changeDataSet(wordList)
+            if(wordList.size > 0) {
+                addNewWord.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun addClickHandler() {
+        val buttonNext = binding.addAddButton;
+        buttonNext.setOnClickListener(View.OnClickListener {
+            if (validateForm()) {
+                saveWord()
+            } else {
+                MainActivity.displayToast(requireContext(),R.string.word_validation_error_start_form)
+            }
+        })
     }
 
     private fun addWordsRecyclerView() {

@@ -89,7 +89,7 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
     }
 
     fun checkAnswers() {
-        val totalPoints: Float = dataSet.size + 1F
+        val totalPoints: Float = dataSet.size.toFloat()
         var gainedPoints : Float = 0F
         dataSet.forEachIndexed { index, word ->
             val currentQuestion = questionInformation.getOrNull(index + 1)
@@ -105,7 +105,7 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
             }
         }
         highlightAnswers = true;
-        var result : Float = gainedPoints/totalPoints
+        val result : Float = gainedPoints/totalPoints
         resultMessage = ((result * 100).roundToInt()).toString() + "% " +  context!!.getString(R.string.exam_result_message)
         changeDataSet(dataSet)
     }

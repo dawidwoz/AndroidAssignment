@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.FragmentExamBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
 import uk.ac.aber.dcs.cs31620.assignment.model.WordViewModel
 
@@ -33,11 +34,7 @@ class ExamFragment : Fragment()  {
         binding = FragmentExamBinding.inflate(layoutInflater)
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 
-        arguments?.getInt("numberQuestion")?.let {
-            questionNumber = it;
-        } ?: run {
-            MainActivity.displayToast(requireContext(), R.string.general_error)
-        };
+        getQuestionNumber()
 
         addWordsRecyclerView()
 
@@ -59,6 +56,14 @@ class ExamFragment : Fragment()  {
         MainActivity.showBottomNav()
         MainActivity.setWarnWhenBack(false)
         super.onDestroy()
+    }
+
+    private fun getQuestionNumber() {
+        arguments?.getInt(Common.ArgumentNumberQuestion.value)?.let {
+            questionNumber = it;
+        } ?: run {
+            MainActivity.displayToast(requireContext(), R.string.general_error)
+        };
     }
 
     private fun addWordsRecyclerView() {

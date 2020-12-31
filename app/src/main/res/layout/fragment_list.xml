@@ -24,7 +24,7 @@
         android:id="@+id/list_text_no_words"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_no_words"
+        android:text="@string/info_no_words"
         android:textSize="30sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,7 @@
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
             android:gravity="start"
-            android:text="Original:"
+            android:text="@string/list_original"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -57,11 +57,11 @@
             android:id="@+id/word_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_weight="0.5"
             android:gravity="start"
-            android:text="Translation:"
+            android:text="@string/list_translation"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
