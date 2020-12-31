@@ -3,15 +3,13 @@ package uk.ac.aber.dcs.cs31620.assignment.ui.exam
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import uk.ac.aber.dcs.cs31620.assignment.MainActivity
 import uk.ac.aber.dcs.cs31620.assignment.R
@@ -23,8 +21,9 @@ class ExamFragment : Fragment()  {
 
     private lateinit var binding: FragmentExamBinding
     private lateinit var wordsViewModel: WordViewModel
-    private var questionNumber: Int = 0
     private lateinit var examListAdapter: ExamListAdapter
+    private var questionNumber: Int = 0
+    private var isExamOver : Boolean = false
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -46,9 +45,7 @@ class ExamFragment : Fragment()  {
             examListAdapter.changeDataSet(it as MutableList<Word>)
         }
 
-        examListAdapter.clickButtonItem = (View.OnClickListener {
-            confirmSubmitAlert()
-        })
+        examListAdapter.clickButtonItem = ::confirmSubmitAlert
 
         MainActivity.hideToolbar()
         MainActivity.hideBottomNav()
@@ -76,25 +73,23 @@ class ExamFragment : Fragment()  {
     }
 
     private fun confirmSubmitAlert() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
-            when (which) {
-                DialogInterface.BUTTON_POSITIVE -> {
-                    Log.d("TAG", "YS")
+        if (!isExamOver) {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            val dialogClickListener: DialogInterface.OnClickListener = DialogInterface.OnClickListener { _, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        MainActivity.setWarnWhenBack(false)
+                        isExamOver = true
+                        examListAdapter.checkAnswers()
+                    }
                 }
             }
+            builder.setMessage(R.string.exam_warning_button_submit)
+                    .setPositiveButton(R.string.yes, dialogClickListener)
+                    .setNegativeButton(R.string.no, dialogClickListener).show()
+        } else {
+                val navController = findNavController()
+                navController.popBackStack()
         }
-        builder.setMessage(R.string.exam_warning_button_submit)
-                .setPositiveButton(R.string.yes, dialogClickListener)
-                .setNegativeButton(R.string.no, dialogClickListener).show()
-    }
-
-    fun <T> LiveData<T>.observeOnce(observer: Observer<T>) {
-        observeForever(object : Observer<T> {
-            override fun onChanged(t: T?) {
-                observer.onChanged(t)
-                removeObserver(this)
-            }
-        })
     }
 }

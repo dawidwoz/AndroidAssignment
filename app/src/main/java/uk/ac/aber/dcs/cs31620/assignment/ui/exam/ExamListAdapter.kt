@@ -1,16 +1,18 @@
 package uk.ac.aber.dcs.cs31620.assignment.ui.exam
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
+import android.provider.Settings.Global.getString
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.core.text.bold
 import androidx.recyclerview.widget.RecyclerView
 import uk.ac.aber.dcs.cs31620.assignment.R
@@ -18,13 +20,16 @@ import uk.ac.aber.dcs.cs31620.assignment.databinding.ExamItemBinding
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ExamSubmitButtonBinding
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
 import uk.ac.aber.dcs.cs31620.assignment.ui.exam.question.Question
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var dataSet: MutableList<Word> = mutableListOf() // Empty list
     private lateinit var questionInformation: MutableList<Question?>
     var clickListenerItem: View.OnClickListener? = null
-    var clickButtonItem: View.OnClickListener? = null
+    var highlightAnswers: Boolean = false
+    var resultMessage: String = ""
+    lateinit var clickButtonItem: () -> Unit
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -85,6 +90,28 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
         this.notifyDataSetChanged()
     }
 
+    fun checkAnswers() {
+        val totalPoints: Float = dataSet.size + 1F
+        var gainedPoints : Float = 0F
+        dataSet.forEachIndexed { index, word ->
+            val currentQuestion = questionInformation.getOrNull(index + 1)
+            val givenAnswer = when(currentQuestion?.selectedAnswer) {
+                1 -> currentQuestion.answer1
+                2 -> currentQuestion.answer2
+                3 -> currentQuestion.answer3
+                4 -> currentQuestion.answer4
+                else -> ""
+            }
+            if (word.translation == givenAnswer.toString()) {
+               gainedPoints++
+            }
+        }
+        highlightAnswers = true;
+        var result : Float = gainedPoints/totalPoints
+        resultMessage = ((result * 100).roundToInt()).toString() + "% " +  context!!.getString(R.string.exam_result_message)
+        changeDataSet(dataSet)
+    }
+
     private fun getRandomInt(min: Int ,max: Int): Int = Random.nextInt(min, max)
 
     inner class ViewHolderSubmitButton(
@@ -93,7 +120,12 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind() {
-            button.setOnClickListener(clickButtonItem);
+            if(highlightAnswers) {
+                button.text = resultMessage
+            }
+            button.setOnClickListener(View.OnClickListener() {
+                    clickButtonItem()
+            })
         }
     }
 
@@ -122,6 +154,9 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
             answerFields[3].text = question.answer4
             setAnswerOnClick(question, answerFields)
             questionInformation[questionNumber] = question
+            if(highlightAnswers) {
+                highlightCorrectAnswer(word.translation, answerFields)
+            }
         }
 
         private fun defaultAnswerFunction(wordTranslation: String): String {
@@ -156,18 +191,24 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
                     defaultAnswerFunction(word.translation)
                 }
             }
-            questionObject.answer1 = getRandomAnswer()
-            questionObject.answer2 = getRandomAnswer()
-            questionObject.answer3 = getRandomAnswer()
-            questionObject.answer4 = getRandomAnswer()
+            questionObject.answer1 = SpannableStringBuilder().append(getRandomAnswer())
+            questionObject.answer2 = SpannableStringBuilder().append(getRandomAnswer())
+            questionObject.answer3 = SpannableStringBuilder().append(getRandomAnswer())
+            questionObject.answer4 = SpannableStringBuilder().append(getRandomAnswer())
 
             return questionObject
         }
 
         private fun setAnswerOnClick(question: Question, answerFields: List<RadioButton>) {
             answerFields.forEachIndexed { index, it ->
-                it.setOnClickListener {
-                    onItemSelected(question, index+1)
+                if(!highlightAnswers) {
+                    it.setOnClickListener {
+                        onItemSelected(question, index + 1)
+                    }
+                } else {
+                    it.setOnClickListener {
+                        null
+                    }
                 }
             }
         }
@@ -183,6 +224,22 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
                 }
             }
             return answers;
+        }
+
+        private fun highlightCorrectAnswer(solution: String, answers: List<RadioButton>) {
+            answers.forEach {
+                if(solution == it.text.toString()) {
+                    val currentValue = it.text.toString()
+                    val highlightedText = SpannableStringBuilder().bold { append(currentValue) }
+                    highlightedText.setSpan(ForegroundColorSpan(Color.rgb(0, 255, 0)), 0, highlightedText.length, 0)
+                    it.text = highlightedText
+                } else if(it.isChecked) {
+                    val currentValue = it.text.toString()
+                    val highlightedText = SpannableStringBuilder().bold { append(currentValue) }
+                    highlightedText.setSpan(ForegroundColorSpan(Color.rgb(255, 0, 0)), 0, highlightedText.length, 0)
+                    it.text = highlightedText
+                }
+            }
         }
 
         private fun onItemSelected(question: Question, position: Int) {
