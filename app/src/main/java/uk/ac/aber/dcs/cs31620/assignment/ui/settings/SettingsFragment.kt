@@ -21,6 +21,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var languageViewModel: LanguageViewModel
     private lateinit var wordViewModel: WordViewModel
+
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var yourLanguage: EditText
     private lateinit var desiredLanguage: EditText

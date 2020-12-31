@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 
         yourLanguage = binding.yourLangauge
-        wordCount = binding.yourWords
+        wordCount = binding.wordsText
 
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach lit@{
@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
         }
 
         wordsViewModel.getWords().observe(viewLifecycleOwner) { wordsList ->
-            wordCount.setText(wordsList.size.toString())
+            wordCount.setText(this.getString(R.string.home_word_count, wordsList.size))
         }
 
         val buttonAdd = binding.addWordButton;

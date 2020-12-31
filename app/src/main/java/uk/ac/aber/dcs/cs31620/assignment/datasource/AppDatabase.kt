@@ -5,10 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import uk.ac.aber.dcs.cs31620.assignment.model.Language
-import uk.ac.aber.dcs.cs31620.assignment.model.LanguageDao
-import uk.ac.aber.dcs.cs31620.assignment.model.Word
-import uk.ac.aber.dcs.cs31620.assignment.model.WordDao
+import uk.ac.aber.dcs.cs31620.assignment.model.*
 
 @Database(entities = [Language::class, Word::class], version = 1)
 abstract class AppDatabase : RoomDatabase(), RoomDatabaseInterface {
@@ -32,7 +29,7 @@ abstract class AppDatabase : RoomDatabase(), RoomDatabaseInterface {
                         Room.databaseBuilder<AppDatabase>(
                             context.applicationContext,
                             AppDatabase::class.java,
-                            "language_database"
+                            Common.DatabaseName.value
                         )
                             .addCallback(roomDatabaseCallback(context))
                             .build()

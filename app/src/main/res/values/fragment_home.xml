@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home_welcome_desired_language">You\'re learning: </string>
-    <string name="home_word_count">You\'ve added so far </string>
-    <string name="home_word_count_end"> words to you vocabulary list.</string>
+    <string name="home_word_count">You\'ve added %1$d words to your vocabulary list.</string>
     <string name="home_no_words">You haven\'t added any word so far.</string>
     <string name="home_add_description">Button to add new word</string>
 </resources>

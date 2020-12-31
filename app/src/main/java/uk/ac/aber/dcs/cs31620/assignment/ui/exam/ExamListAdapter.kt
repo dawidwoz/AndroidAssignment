@@ -1,10 +1,7 @@
 package uk.ac.aber.dcs.cs31620.assignment.ui.exam
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
-import android.provider.Settings.Global.getString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
@@ -18,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import uk.ac.aber.dcs.cs31620.assignment.R
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ExamItemBinding
 import uk.ac.aber.dcs.cs31620.assignment.databinding.ExamSubmitButtonBinding
+import uk.ac.aber.dcs.cs31620.assignment.model.Common
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
 import uk.ac.aber.dcs.cs31620.assignment.ui.exam.question.Question
 import kotlin.math.roundToInt
@@ -187,7 +185,7 @@ class ExamListAdapter (private val context: Context?) : RecyclerView.Adapter<Rec
                 if (answers.isNotEmpty()) {
                     answers.removeAt(getRandomInt(0, answers.size))
                 } else {
-                    Log.e("QUESTION", "Question generator is corrupted!")
+                    Log.e(Common.TAG_QUESTION.value, context!!.getString(R.string.question_generator_error))
                     defaultAnswerFunction(word.translation)
                 }
             }

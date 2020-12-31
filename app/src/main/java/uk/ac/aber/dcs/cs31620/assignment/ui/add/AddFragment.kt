@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -23,12 +22,10 @@ class AddFragment : Fragment() {
     private lateinit var languageViewModel: LanguageViewModel
     private lateinit var wordsViewModel: WordViewModel
     private lateinit var addViewModel: AddViewModel
-    private lateinit var yourWord: TextView
-    private lateinit var desiredWord: TextView
+    private lateinit var wordsListAdapter: WordsListAdapter
+
     private lateinit var editYourWord: EditText
     private lateinit var editDesiredWord: EditText
-    private lateinit var wordsListAdapter: WordsListAdapter
-    private lateinit var addNewWord: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -40,11 +37,12 @@ class AddFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         addViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
-        yourWord = binding.addYourWord
-        desiredWord = binding.addDesiredWord
+        val yourWord = binding.addYourWord
+        val desiredWord = binding.addDesiredWord
+        val addNewWord = binding.addNewWords
+
         editYourWord = binding.addEditYourWord
         editDesiredWord = binding.addEditDesiredWord
-        addNewWord = binding.addNewWords
 
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach {

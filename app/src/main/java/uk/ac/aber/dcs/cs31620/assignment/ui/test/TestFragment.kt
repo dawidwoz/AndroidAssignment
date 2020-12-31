@@ -19,6 +19,7 @@ class TestFragment : Fragment() {
 
     private lateinit var binding : FragmentTestBinding
     private lateinit var wordsViewModel: WordViewModel
+
     private lateinit var wordCount: EditText
     private var maxQuestionNumber: Int = 0
     private var questionNumber: Int = 0

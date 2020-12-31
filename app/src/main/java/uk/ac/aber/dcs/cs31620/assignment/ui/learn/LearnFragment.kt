@@ -18,6 +18,7 @@ class LearnFragment : Fragment() {
 
     private lateinit var binding: FragmentLearnBinding
     private lateinit var wordsViewModel: WordViewModel
+
     private lateinit var buttonLearn: Button
     private lateinit var textLearn: TextView
     private var shouldGetNewWord: Boolean = false

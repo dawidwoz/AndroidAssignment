@@ -20,9 +20,10 @@ import uk.ac.aber.dcs.cs31620.assignment.model.LanguageViewModel
 class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
+    private lateinit var languageViewModel: LanguageViewModel
+
     private lateinit var yourLanguage: EditText
     private lateinit var desiredLanguage: EditText
-    private lateinit var languageViewModel: LanguageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
