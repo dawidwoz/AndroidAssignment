@@ -110,12 +110,12 @@ class ListFragment : Fragment() {
                     MainActivity.showBottomNav()
                 }
 
-                if (gridLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
-                    MainActivity.showBottomNav()
-                }
-
                 if (gridLayoutManager.findLastVisibleItemPosition() == gridLayoutManager.itemCount - 1) {
                     MainActivity.hideBottomNav()
+                }
+
+                if (gridLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
+                    MainActivity.showBottomNav()
                 }
 
                 super.onScrolled(recyclerView, dx, dy)
