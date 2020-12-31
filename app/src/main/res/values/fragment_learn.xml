@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_question_translation">What\'s this word translation? Click to find out!</string>
+    <string name="learn_question_new_word">Click to get a new word!</string>
+</resources>
