@@ -10,9 +10,9 @@
         android:id="@+id/exam_original"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/normal_margin"
         android:gravity="start"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,10 +30,10 @@
         android:id="@+id/exam_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/small_margin"
         android:gravity="start"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exam_original">
 

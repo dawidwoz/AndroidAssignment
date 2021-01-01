@@ -23,9 +23,9 @@
                 android:id="@+id/add_word"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/normal_margin"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -40,7 +40,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/add_original_word"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/font_size" />
 
                 <EditText
                     android:id="@+id/add_edit_your_word"
@@ -56,9 +56,9 @@
                 android:id="@+id/add_foreign_word"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_marginEnd="@dimen/normal_margin"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -74,7 +74,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/add_translation_word"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/font_size" />
 
                 <EditText
                     android:id="@+id/add_edit_desired_word"
@@ -89,8 +89,8 @@
                 android:id="@+id/add_add_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_marginEnd="@dimen/big_margin"
                 android:text="@string/add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_foreign_word" />
@@ -99,7 +99,7 @@
                 android:id="@+id/add_new_words"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:text="@string/add_new_words"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -110,8 +110,8 @@
                 android:id="@+id/add_new_words_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginBottom="@dimen/small_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

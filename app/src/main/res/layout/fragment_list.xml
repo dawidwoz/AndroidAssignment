@@ -10,8 +10,8 @@
         android:id="@+id/list_add_word_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:layout_marginBottom="@dimen/extra_big_margin"
         android:backgroundTint="@color/primaryLightColor"
         android:clickable="true"
         android:contentDescription="@string/home_add_description"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info_no_words"
-        android:textSize="30sp"
+        android:textSize="@dimen/big_font_size"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,31 +45,31 @@
             android:id="@+id/list_word_original"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/extra_small_margin"
             android:layout_weight="0.5"
             android:gravity="start"
             android:text="@string/list_original"
-            android:textSize="14sp"
+            android:textSize="@dimen/font_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/list_word_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/extra_small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
             android:layout_weight="0.5"
             android:gravity="start"
             android:text="@string/list_translation"
-            android:textSize="14sp"
+            android:textSize="@dimen/font_size"
             android:textStyle="bold" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/normal_plus_margin"
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -79,7 +79,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="@dimen/small_margin">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_words_list"
