@@ -38,6 +38,23 @@ class EditFragment : Fragment() {
         editYourWord = binding.editEditYourWord
         editDesiredWord = binding.editEditDesiredWord
 
+        setLanguageText()
+
+        addClickHandler()
+
+        fillEditView();
+
+        MainActivity.UiController.hideBottomNav()
+
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        MainActivity.UiController.showBottomNav()
+        super.onDestroy()
+    }
+
+    private fun setLanguageText() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach {
                 when (it.langauge) {
@@ -47,7 +64,9 @@ class EditFragment : Fragment() {
                 }
             }
         }
+    }
 
+    private fun addClickHandler() {
         val buttonChange = binding.editChangeButton;
         buttonChange.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
@@ -61,17 +80,6 @@ class EditFragment : Fragment() {
         buttonDelete.setOnClickListener(View.OnClickListener {
             confirmDeleteAlert()
         })
-
-        fillEditView();
-
-        MainActivity.UiController.hideBottomNav()
-
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        MainActivity.UiController.showBottomNav()
-        super.onDestroy()
     }
 
     private fun changeWord() {

@@ -37,6 +37,30 @@ class LearnFragment : Fragment() {
 
         getNewWord()
 
+        addClickHandler()
+
+        return binding.root
+    }
+
+    private fun getNewWord() {
+        wordsViewModel.getRandomWords(1).observe(viewLifecycleOwner) {
+            currentWord = it.getOrNull(0)
+            if(currentWord == null) {
+                binding.learnButtonWord.visibility = View.GONE
+                binding.learnQuestion.visibility = View.GONE
+                binding.learnTextNoWords.visibility = View.VISIBLE
+            } else {
+                binding.learnButtonWord.visibility = View.VISIBLE
+                binding.learnQuestion.visibility = View.VISIBLE
+                binding.learnTextNoWords.visibility = View.GONE
+                textLearn.text = requireContext().getString(R.string.learn_question_translation)
+                buttonLearn.text = currentWord?.original
+                shouldGetNewWord = true
+            }
+        }
+    }
+
+    private fun addClickHandler() {
         buttonLearn.setOnClickListener {
             if (!shouldGetNewWord) {
                 getNewWord()
@@ -46,16 +70,6 @@ class LearnFragment : Fragment() {
                 shouldGetNewWord = false
             }
         }
-
-        return binding.root
     }
 
-    private fun getNewWord() {
-        wordsViewModel.getRandomWords(1).observe(viewLifecycleOwner) {
-            currentWord = it.getOrNull(0)
-            textLearn.text = requireContext().getString(R.string.learn_question_translation)
-            buttonLearn.text = currentWord?.original
-            shouldGetNewWord = true
-        }
-    }
 }

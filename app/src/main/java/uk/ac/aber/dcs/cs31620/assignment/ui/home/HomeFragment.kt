@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     private lateinit var languageViewModel: LanguageViewModel
     private lateinit var wordsViewModel: WordViewModel
     private lateinit var yourLanguage: TextView
-    private lateinit var wordCount: TextView
+    private lateinit var wordText: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,8 +33,24 @@ class HomeFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 
         yourLanguage = binding.yourLangauge
-        wordCount = binding.wordsText
+        wordText = binding.wordsText
 
+        setLanguageText()
+
+        setWordCountText()
+
+        addClickHandler()
+
+        return binding.root
+    }
+
+    private fun setWordCountText() {
+        wordsViewModel.getWords().observe(viewLifecycleOwner) { wordsList ->
+            wordText.setText(this.getString(R.string.home_word_count, wordsList.size))
+        }
+    }
+
+    private fun setLanguageText() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach lit@{
                 when (it.langauge) {
@@ -45,17 +61,13 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
 
-        wordsViewModel.getWords().observe(viewLifecycleOwner) { wordsList ->
-            wordCount.setText(this.getString(R.string.home_word_count, wordsList.size))
-        }
-
+    private fun addClickHandler() {
         val buttonAdd = binding.addWordButton;
         buttonAdd.setOnClickListener(View.OnClickListener {
             goToAdd()
         })
-
-        return binding.root
     }
 
     private fun goToAdd() {

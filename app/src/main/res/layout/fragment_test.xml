@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.test.TestFragment">
 
+    <TextView
+        android:id="@+id/test_text_no_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_no_words"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/test_edit_number_question"
         android:layout_width="wrap_content"

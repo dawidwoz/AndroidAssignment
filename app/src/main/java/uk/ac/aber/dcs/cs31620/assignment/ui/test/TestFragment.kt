@@ -36,8 +36,19 @@ class TestFragment : Fragment() {
 
         wordsViewModel.getWords().observe(viewLifecycleOwner) { wordsList ->
             maxQuestionNumber = wordsList.size
-            val newHint = wordCount.hint.toString() + " " + maxQuestionNumber
-            wordCount.hint = newHint;
+            if(maxQuestionNumber == 0) {
+                binding.testButtonStart.visibility = View.GONE
+                binding.testEditNumberQuestion.visibility = View.GONE
+                binding.testQuestionBeforeStart.visibility = View.GONE
+                binding.testTextNoWords.visibility = View.VISIBLE
+            } else {
+                binding.testButtonStart.visibility = View.VISIBLE
+                binding.testEditNumberQuestion.visibility = View.VISIBLE
+                binding.testQuestionBeforeStart.visibility = View.VISIBLE
+                binding.testTextNoWords.visibility = View.GONE
+                val newHint = wordCount.hint.toString() + " " + maxQuestionNumber
+                wordCount.hint = newHint;
+            }
         }
 
         val buttonStart = binding.testButtonStart;
