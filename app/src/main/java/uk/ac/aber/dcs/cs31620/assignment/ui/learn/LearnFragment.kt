@@ -45,14 +45,10 @@ class LearnFragment : Fragment() {
     private fun getNewWord() {
         wordsViewModel.getRandomWords(1).observe(viewLifecycleOwner) {
             currentWord = it.getOrNull(0)
-            if(currentWord == null) {
-                binding.learnButtonWord.visibility = View.GONE
-                binding.learnQuestion.visibility = View.GONE
-                binding.learnTextNoWords.visibility = View.VISIBLE
+            if (currentWord == null) {
+                noElementView()
             } else {
-                binding.learnButtonWord.visibility = View.VISIBLE
-                binding.learnQuestion.visibility = View.VISIBLE
-                binding.learnTextNoWords.visibility = View.GONE
+                fullView()
                 textLearn.text = requireContext().getString(R.string.learn_question_translation)
                 buttonLearn.text = currentWord?.original
                 shouldGetNewWord = true
@@ -70,6 +66,18 @@ class LearnFragment : Fragment() {
                 shouldGetNewWord = false
             }
         }
+    }
+
+    private fun noElementView() {
+        binding.learnButtonWord.visibility = View.GONE
+        binding.learnQuestion.visibility = View.GONE
+        binding.learnTextNoWords.visibility = View.VISIBLE
+    }
+
+    private fun fullView() {
+        binding.learnButtonWord.visibility = View.VISIBLE
+        binding.learnQuestion.visibility = View.VISIBLE
+        binding.learnTextNoWords.visibility = View.GONE
     }
 
 }

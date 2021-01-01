@@ -34,23 +34,27 @@ class TestFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         wordCount = binding.testEditNumberQuestion
 
+        checkHowManyWords()
+
+        addClickHandler()
+
+        return binding.root
+    }
+
+    private fun checkHowManyWords() {
         wordsViewModel.getWords().observe(viewLifecycleOwner) { wordsList ->
             maxQuestionNumber = wordsList.size
             if(maxQuestionNumber == 0) {
-                binding.testButtonStart.visibility = View.GONE
-                binding.testEditNumberQuestion.visibility = View.GONE
-                binding.testQuestionBeforeStart.visibility = View.GONE
-                binding.testTextNoWords.visibility = View.VISIBLE
+                noElementView()
             } else {
-                binding.testButtonStart.visibility = View.VISIBLE
-                binding.testEditNumberQuestion.visibility = View.VISIBLE
-                binding.testQuestionBeforeStart.visibility = View.VISIBLE
-                binding.testTextNoWords.visibility = View.GONE
+                fullView()
                 val newHint = wordCount.hint.toString() + " " + maxQuestionNumber
                 wordCount.hint = newHint;
             }
         }
+    }
 
+    private fun addClickHandler() {
         val buttonStart = binding.testButtonStart;
         buttonStart.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
@@ -59,8 +63,6 @@ class TestFragment : Fragment() {
                 MainActivity.UiController.displayToast(requireContext(), R.string.question_number_validation_error_test_form)
             }
         })
-
-        return binding.root
     }
 
     private fun goToExam() {
@@ -89,4 +91,19 @@ class TestFragment : Fragment() {
     private fun validateForm(): Boolean {
         return wordCount.text.isNotEmpty() && checkIfInRange(wordCount.text.toString())
     }
+
+    private fun noElementView() {
+        binding.testButtonStart.visibility = View.GONE
+        binding.testEditNumberQuestion.visibility = View.GONE
+        binding.testQuestionBeforeStart.visibility = View.GONE
+        binding.testTextNoWords.visibility = View.VISIBLE
+    }
+
+    private fun fullView() {
+        binding.testButtonStart.visibility = View.VISIBLE
+        binding.testEditNumberQuestion.visibility = View.VISIBLE
+        binding.testQuestionBeforeStart.visibility = View.VISIBLE
+        binding.testTextNoWords.visibility = View.GONE
+    }
+
 }

@@ -115,19 +115,19 @@ class EditFragment : Fragment() {
     }
 
     private fun fillEditView() {
-        arguments?.getString("originalWord")?.let{
+        arguments?.getString(Common.OriginalWord.value)?.let{
             editYourWord.setText(it)
         } ?: run {
             handleError()
         };
 
-        arguments?.getString("translationWord")?.let{
+        arguments?.getString(Common.TranslationWord.value)?.let{
             editDesiredWord.setText(it)
         } ?: run {
             handleError()
         };
 
-        arguments?.getString("idWord")?.let{
+        arguments?.getString(Common.IdWord.value)?.let{
             wordId = try {
                 it.toInt()
             } catch (nfe: NumberFormatException) {

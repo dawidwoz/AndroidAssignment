@@ -36,6 +36,15 @@ class SettingsFragment : Fragment() {
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         yourLanguage = binding.settingEditYourLanguage
         desiredLanguage = binding.settingEditDesiredLanguage
+
+        setLanguagesText()
+
+        addClickHandler()
+
+        return binding.root
+    }
+
+    private fun setLanguagesText() {
         languageViewModel.getLanguage().observe(viewLifecycleOwner) { languageList ->
             languageList.forEach {
                 when (it.langauge) {
@@ -45,6 +54,9 @@ class SettingsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun addClickHandler() {
         val buttonSave = binding.settingSaveButton;
         buttonSave.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
@@ -53,8 +65,6 @@ class SettingsFragment : Fragment() {
                 MainActivity.UiController.displayToast(requireContext(),R.string.language_validation_error_start_form)
             }
         })
-
-        return binding.root
     }
 
     private fun validateForm(): Boolean {

@@ -5,8 +5,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -68,21 +66,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        toolbar.setNavigationOnClickListener(View.OnClickListener {
-            navController.popBackStack()
-        })
-
-        val navView: BottomNavigationView = binding.navView
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_start, R.id.navigation_home, R.id.navigation_list, R.id.navigation_learn, R.id.navigation_test, R.id.navigation_settings))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setNavigationAndToolbar()
     }
 
     override fun onBackPressed() {
@@ -103,5 +87,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setNavigationAndToolbar() {
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            navController.popBackStack()
+        })
+
+        val navView: BottomNavigationView = binding.navView
+        val appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.navigation_start, R.id.navigation_home, R.id.navigation_list, R.id.navigation_learn, R.id.navigation_test, R.id.navigation_settings))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
 
 }

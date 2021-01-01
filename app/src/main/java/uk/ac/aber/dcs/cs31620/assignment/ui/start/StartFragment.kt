@@ -30,15 +30,22 @@ class StartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): ConstraintLayout {
+        languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
+        checkLanguages()
+
         binding = FragmentStartBinding.inflate(layoutInflater)
         yourLanguage = binding.editOwnLanguage
         desiredLanguage = binding.editForeignLanguage
 
-        languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
-
         MainActivity.UiController.hideBottomNav()
         MainActivity.UiController.hideToolbar()
 
+        addClickHandler()
+
+        return binding.root
+    }
+
+    private fun addClickHandler() {
         val buttonNext = binding.button;
         buttonNext.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
@@ -47,8 +54,6 @@ class StartFragment : Fragment() {
                 MainActivity.displayToast(requireContext(),R.string.language_validation_error_start_form)
             }
         })
-        checkLanguages()
-        return binding.root
     }
 
     private fun validateForm(): Boolean {

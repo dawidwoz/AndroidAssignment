@@ -5,5 +5,8 @@ enum class Common(val value: String) {
     YourLanguage("your_language"),
     DesiredLanguage("desired_language"),
     ArgumentNumberQuestion("numberQuestion"),
+    TranslationWord("translationWord"),
+    OriginalWord("originalWord"),
+    IdWord("idWord"),
     TAG_QUESTION("QUESTION")
 }
