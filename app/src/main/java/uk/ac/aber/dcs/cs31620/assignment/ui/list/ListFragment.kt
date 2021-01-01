@@ -57,7 +57,7 @@ class ListFragment : Fragment() {
     }
 
     private fun addClickHandler() {
-        val buttonAdd = binding.addWordButton;
+        val buttonAdd = binding.listAddWordButton;
         buttonAdd.setOnClickListener(View.OnClickListener {
             goToAdd()
         })

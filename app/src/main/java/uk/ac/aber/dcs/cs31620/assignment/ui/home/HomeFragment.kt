@@ -32,8 +32,8 @@ class HomeFragment : Fragment() {
         languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 
-        yourLanguage = binding.yourLangauge
-        wordText = binding.wordsText
+        yourLanguage = binding.homeYourLanguage
+        wordText = binding.homeWordsText
 
         setLanguageText()
 
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun addClickHandler() {
-        val buttonAdd = binding.addWordButton;
+        val buttonAdd = binding.homeAddWordButton;
         buttonAdd.setOnClickListener(View.OnClickListener {
             goToAdd()
         })

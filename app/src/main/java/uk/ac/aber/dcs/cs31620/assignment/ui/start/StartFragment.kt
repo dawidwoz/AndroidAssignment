@@ -34,8 +34,8 @@ class StartFragment : Fragment() {
         checkLanguages()
 
         binding = FragmentStartBinding.inflate(layoutInflater)
-        yourLanguage = binding.editOwnLanguage
-        desiredLanguage = binding.editForeignLanguage
+        yourLanguage = binding.startEditOwnLanguage
+        desiredLanguage = binding.startEditForeignLanguage
 
         MainActivity.UiController.hideBottomNav()
         MainActivity.UiController.hideToolbar()
@@ -46,7 +46,7 @@ class StartFragment : Fragment() {
     }
 
     private fun addClickHandler() {
-        val buttonNext = binding.button;
+        val buttonNext = binding.startButton;
         buttonNext.setOnClickListener(View.OnClickListener {
             if (validateForm()) {
                 saveLanguages()

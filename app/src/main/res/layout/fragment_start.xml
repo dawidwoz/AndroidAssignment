@@ -7,18 +7,18 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/incentiveOwnLanguage"
+        android:id="@+id/start_incentive_own_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
         android:text="@string/incentive_own_language"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editOwnLanguage"
+        app:layout_constraintBottom_toTopOf="@+id/start_edit_own_language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/incentiveForeignLanguage"
+        android:id="@+id/start_incentive_foreign_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/incentive_foreign_language"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editOwnLanguage"
+        android:id="@+id/start_edit_own_language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -39,13 +39,13 @@
         android:ems="10"
         android:hint="@string/your_language"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/incentiveForeignLanguage"
+        app:layout_constraintBottom_toTopOf="@+id/start_incentive_foreign_language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editForeignLanguage"
+        android:id="@+id/start_edit_foreign_language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -58,17 +58,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/incentiveForeignLanguage" />
+        app:layout_constraintTop_toBottomOf="@+id/start_incentive_foreign_language" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editForeignLanguage" />
+        app:layout_constraintTop_toBottomOf="@+id/start_edit_foreign_language" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
