@@ -1,6 +1,8 @@
 package uk.ac.aber.dcs.cs31620.assignment
 
 
+import android.content.pm.ActivityInfo
+import android.os.SystemClock
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -32,6 +34,10 @@ class DeleteWordTest {
 
     @Test
     fun deleteWordTest() {
+        // Comment it out when you want to portrait orientation during test
+        mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        SystemClock.sleep(1500);
+
         val appCompatEditText = onView(
             allOf(
                 withId(R.id.start_edit_own_language),
