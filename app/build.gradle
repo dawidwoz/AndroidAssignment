@@ -8,6 +8,20 @@ plugins {
 apply plugin: "androidx.navigation.safeargs"
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('key.jks')
+            storePassword '123456'
+            keyAlias 'release'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('key.jks')
+            storePassword '123456'
+            keyAlias 'release'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -32,6 +46,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            testCoverageEnabled = true
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -47,6 +66,24 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    flavorDimensions "testing"
+    productFlavors {
+        in_memory_database {
+            dimension "testing"
+        }
+        persistent_database {
+            dimension "testing"
+        }
+    }
+
+    android.variantFilter { variant ->
+        if(variant.buildType.name.equals('release') &&
+                variant.getFlavors().get(0).name.equals('in_memory_database')) {
+            variant.setIgnore(true);
+        }
+    }
+
 }
 
 dependencies {
