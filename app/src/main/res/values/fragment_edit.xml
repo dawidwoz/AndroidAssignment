@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="edit_change_word_success">Word has been successfully updated!</string>
-    <string name="edit_delete_confirm_message">Are ypu sure you want to delete this word?</string>
+    <string name="edit_delete_confirm_message">Are you sure you want to delete this word?</string>
     <string name="edit_delete_word_success">Word has been successfully deleted!</string>
 </resources>
