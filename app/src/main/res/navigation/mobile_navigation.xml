@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_start"
         android:name="uk.ac.aber.dcs.cs31620.assignment.ui.start.StartFragment"
-        android:label="@string/menu_start"
+        android:label="@string/start_menu_start"
         tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_start_to_home"

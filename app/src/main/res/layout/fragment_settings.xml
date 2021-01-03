@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="start"
-            android:text="@string/incentive_own_language"
+            android:text="@string/start_incentive_own_language"
             android:textSize="@dimen/font_size" />
 
         <EditText
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="start"
-            android:text="@string/incentive_foreign_language"
+            android:text="@string/start_incentive_foreign_language"
             android:textSize="@dimen/smaller_font_size" />
 
         <EditText
