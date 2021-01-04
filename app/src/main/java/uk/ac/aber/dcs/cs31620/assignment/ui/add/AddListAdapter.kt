@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import uk.ac.aber.dcs.cs31620.assignment.model.Word
 
-class AddViewModel(application: Application) :  AndroidViewModel(application) {
+class AddListAdapter(application: Application) :  AndroidViewModel(application) {
     var wordsList: MutableLiveData<MutableList<Word>> = MutableLiveData<MutableList<Word>>()
         private set
 

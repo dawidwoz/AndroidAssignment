@@ -21,7 +21,7 @@ class AddFragment : Fragment() {
     private lateinit var binding: FragmentAddBinding
     private lateinit var languageViewModel: LanguageViewModel
     private lateinit var wordsViewModel: WordViewModel
-    private lateinit var addViewModel: AddViewModel
+    private lateinit var addListAdapter: AddListAdapter
     private lateinit var wordsListAdapter: WordsListAdapter
 
     private lateinit var editYourWord: EditText
@@ -35,7 +35,7 @@ class AddFragment : Fragment() {
         binding = FragmentAddBinding.inflate(layoutInflater)
         languageViewModel = ViewModelProvider(this).get(LanguageViewModel::class.java)
         wordsViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
-        addViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
+        addListAdapter = ViewModelProvider(this).get(AddListAdapter::class.java)
 
         editYourWord = binding.addEditYourWord
         editDesiredWord = binding.addEditDesiredWord
@@ -64,7 +64,7 @@ class AddFragment : Fragment() {
 
     private fun saveWord() {
         activity?.let { it1 -> MainActivity.hideSoftKeyboard(it1) }
-        addViewModel.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
+        addListAdapter.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
         wordsViewModel.addWord(editYourWord.text.toString(), editDesiredWord.text.toString())
         editYourWord.setText("")
         editDesiredWord.setText("")
@@ -87,7 +87,7 @@ class AddFragment : Fragment() {
 
     private fun checkIfThereWords() {
         val addNewWord = binding.addNewWords
-        addViewModel.getWords().observe(viewLifecycleOwner) { wordList ->
+        addListAdapter.getWords().observe(viewLifecycleOwner) { wordList ->
             wordsListAdapter.changeDataSet(wordList)
             if(wordList.size > 0) {
                 addNewWord.visibility = View.VISIBLE
